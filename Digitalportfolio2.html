@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-image: url('image copy 7.png');
+      
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+    #particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; 
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background-color: rgba(255, 247, 247, 0.958);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 8%;
+      background: transparent;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav h3 {
+      color: #f5f9faec;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #bf2de7;
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    .hero img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid #ff4b2b;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      color: #ff4b2b;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      width: 60%;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #ff4b2b;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff6a4d;
+    }
+
+    section {
+      padding: 80px 8%;
+      text-align: left;
+    }
+
+    section h3 {
+      color: #3a3a3c;
+      margin-bottom: 15px;
+    }
+    #skills {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 50px;
+      text-align: left;
+    }
+
+    #skills h4 {
+      color: #ff6f3c;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .skill-category {
+      margin-bottom: 30px;
+    }
+
+    .skill-category h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+    .skill-card {
+      background: #333;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .skill-card img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+
+    .skill-card p {
+      margin: 0;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .skill-card:hover {
+      background: #ff6f3c;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(255,111,60,0.5);
+    }
+    #projects {
+      width: 90%;
+      margin: 20px auto;
+    }
+
+    #projects h4 {
+      color: #ff6f3c;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .project-container {
+  display: flex;
+  justify-content: center; 
+  align-items: flex-start; 
+  gap:20px;
+  margin-top: 20px; 
+  flex-wrap: wrap;     
+}
+
+    .projectS {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .project-card {
+      background-color: #2c2c2c;
+      width: 55%;
+      min-width: 290px;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(255, 111, 60, 0.2);
+      transition: 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(255, 111, 60, 0.5);
+    }
+
+    .project-card h5 {
+      color: #ff6f3c;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card .tech {
+      font-size: 0.9rem;
+      color: #ffcc99;
+      margin-bottom: 10px;
+    }
+
+    .project-card .desc {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .project-card ul {
+      padding-left: 20px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .view-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff6f3c;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .view-btn:hover {
+      background-color: #ff4500;
+    }
+    #certifications {
+      text-align: center;
+    }
+
+    #certifications h3 {
+      font-size: 28px;
+      color: #fa6220;
+      margin-bottom: 25px;
+    }
+
+    .cert-container {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .cert-container h4 {
+      text-align: left;
+      color: #ff4b2b;
+      margin: 15px 0 10px;
+      font-size: 18px;
+    }
+
+    .cert-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2a2a2a;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid transparent;
+      transition: 0.3s ease;
+    }
+
+    .cert-card span {
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .cert-card:hover {
+      border: 1px solid #ff4b2b;
+      transform: scale(1.02);
+    }
+
+    .view-btn {
+      background: #ff4b2b;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .view-btn:hover {
+      background: #ff6a4d;
+    }
+
+    /* Education */
+    #education {
+      text-align: center;
+    }
+
+    #education h3 {
+      font-size: 28px;
+      color: #ff4b2b;
+      margin-bottom: 25px;
+    }
+
+    .edu-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .edu-card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      border: 1px solid #444;
+      transition: 0.3s ease;
+    }
+
+    .edu-card h4 {
+      color: #ff4b2b;
+      margin-bottom: 8px;
+    }
+
+    .edu-card p {
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    .edu-card span {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .edu-card:hover {
+      transform: scale(1.05);
+      border: 1px solid #ff4b2b;
+      box-shadow: 0 8px 20px rgba(255, 75, 43, 0.3);
+    }
+    #contact h3 {
+      font-size: 28px;
+      color: #ff4b2b;
+      margin-bottom: 25px;
+    }
+
+    .contact-box {
+      margin-top: 20px;
+      background: #54565694;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .contact-box input,
+    .contact-box textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    footer {
+      background: #24efe9;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 50px;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div id="particles-container"></div>
+  <nav>
+    <h3>SANDHIYA S</h3>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="hero">
+    <img src="profileJW7W71.jpg" alt="Profile">
+    <h2>Hello, I'm <b>Sandhiya S</b></h2>
+    <p>
+      I am a BCA Student, Web Developer, learner, skilled in HTML, CSS, and Java Script, 
+      focused on building high-performance web. Passionate about clean code, innovative problem-solving, and continuous learning.
+    </p>
+    <a href="RESEUME.pdf" class="btn" target="_blank">📄Resume</a>
+  </section>
+  <section id="skills">
+    <center><h4>SKILLS</h4></center>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h3>LANGUAGES</h3>
+        <div class="skill-grid">
+          <div class="skill-card"><img src="image copy.png" alt="Python"><p>Python</p></div>
+          <div class="skill-card"><img src="image copy 2.png" alt="JavaScript"><p>JavaScript</p></div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>WEB & FRAMEWORKS</h3>
+        <div class="skill-grid">
+          <div class="skill-card"><img src="image copy 3.png" alt="HTML"><p>HTML</p></div>
+          <div class="skill-card"><img src="image copy 4.png" alt="CSS"><p>CSS</p></div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>TOOLS & IDEs</h3>
+        <div class="skill-grid">
+          <div class="skill-card"><img src="image copy 5.png" alt="VS Code"><p>VS Code</p></div>
+          <div class="skill-card"><img src="image.png" alt="GitHub"><p>GitHub</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="projects">
+    <h4>PROJECT</h4>
+    <div class="project-container">
+    <div class="project-card highlight">
+      <h5>DIGITAL PORTFOLIO</h5>
+      <p class="tech">HTML, CSS, JAVASCRIPT</p>
+      <p class="desc">
+        A digital portfolio is an online collection of my work, skills, accomplishments, and education presented in a structured and visually appealing format.
+      </p>
+      <ul>
+        <li>showcase my work instead of just describing it in a resume..</li>
+        <li>provide an interactive and visual representation of my capabilities.</li>
+        <li>make it easier for employers or clients to evaluate my skills.</li>
+      </ul>
+      <a href="#" class="view-btn">VIEW</a>
+    </div>
+    </div>
+  </section>
+  <section id="certifications">
+    <h3>CERTIFICATES</h3>
+    <div class="cert-container">
+      <h4>Course completion</h4>
+      <div class="cert-card">
+        <span>HTML and CSS</span>
+        <a href="html and css.jpeg" class='view-btn'>view</a>
+      </div>
+      <div class="cert-card">
+        <span>Web Development Basic</span>
+        <a href="web basics.jpeg" class='view-btn'>view</a>
+      </div>
+      <div class="cert-card">
+        <span>Web Basics</span>
+        <a href="web apps.jpeg" class='view-btn'>view</a>
+      </div>
+      <div class="cert-card">
+        <span>Frontend Development</span>
+        <a href="front end.jpeg" class='view-btn'>view</a>
+      </div>
+    </div>
+  </section>
+  <section id="education">
+    <h3>EDUCATION</h3>
+    <div class="edu-container">
+      <div class="edu-card">
+        <h4>BACHELOR OF COMPUTER APPLICATION</h4>
+        <br>
+        <p>Holy Cross Arts And Science College for Women Affilated by Thiruvalluvar University</p>
+        <br>
+        <span>Percentage: 70</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <center>
+      <h3>CONTACT</h3>
+      <div class="contact-box">
+        <form>
+          <div class="form-row">
+            <input type="text" placeholder="First Name" required>
+            <input type="text" placeholder="Last Name" required>
+          </div>
+          <input type="email" placeholder="Email" required><br>
+          <textarea placeholder="Message" rows="5" required></textarea><br>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+
+        <div class="social-links">
+          <p>Connect with me on:</p>
+          <a href="https://www.linkedin.com/in/sandhiyas30/" target="_blank">🔗 LinkedIn</a>
+          <a href="https://github.com/sandhiyas30" target="_blank">💻 GitHub</a>
+          <a href="mailto:sandhiyajee23@gmail.com">📧 Email</a>
+        </div>
+      </div>
+    </center>
+  </section>
+  <footer>
+    © 2025 SANDHIYA | All Rights Reserved
+  </footer>
+  <script>
+    const particlesContainer = document.getElementById("particles-container");
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+      createParticle();
+    }
+
+    function createParticle() {
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      const size = Math.random() * 3 + 1;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      resetParticle(particle);
+      particlesContainer.appendChild(particle);
+      animateParticle(particle);
+    }
+
+    function resetParticle(particle) {
+      const posX = Math.random() * 100;
+      const posY = Math.random() * 100;
+      particle.style.left = `${posX}%`;
+      particle.style.top = `${posY}%`;
+      particle.style.opacity = "0";
+      return { x: posX, y: posY };
+    }
+
+    function animateParticle(particle) {
+      const pos = resetParticle(particle);
+      const duration = Math.random() * 10 + 10;
+      const delay = Math.random() * 5;
+
+      setTimeout(() => {
+        particle.style.transition = `all ${duration}s linear`;
+        particle.style.opacity = Math.random() * 0.3 + 0.1;
+        const moveX = Math.min(Math.max(pos.x + (Math.random() * 20 - 10), 0), 100);
+        const moveY = Math.min(Math.max(pos.y - Math.random() * 30, 0), 100);
+        particle.style.left = `${moveX}%`;
+        particle.style.top = `${moveY}%`;
+        setTimeout(() => animateParticle(particle), duration * 1000);
+      }, delay * 1000);
+    }
+
+    // Optional: Mouse interaction particles
+    document.addEventListener("mousemove", (e) => {
+      const mouseX = (e.clientX / window.innerWidth) * 100;
+      const mouseY = (e.clientY / window.innerHeight) * 100;
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      const size = Math.random() * 4 + 2;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${mouseX}%`;
+      particle.style.top = `${mouseY}%`;
+      particle.style.opacity = "0.6";
+      particlesContainer.appendChild(particle);
+
+      setTimeout(() => {
+        particle.style.transition = "all 2s ease-out";
+        const moveX = Math.min(Math.max(mouseX + (Math.random() * 10 - 5), 0), 100);
+        const moveY = Math.min(Math.max(mouseY + (Math.random() * 10 - 5), 0), 100);
+        particle.style.left = `${moveX}%`;
+        particle.style.top = `${moveY}%`;
+        particle.style.opacity = "0";
+        setTimeout(() => particle.remove(), 2000);
+      }, 10);
+    });
+  </script>
+ 
+  
+</body>
+</html>
